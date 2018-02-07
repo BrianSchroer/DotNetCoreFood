@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetCoreFood
@@ -17,8 +14,17 @@ namespace DotNetCoreFood
         {
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.' 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
+        /// <param name="configuration">Not added by default. 
+        /// I added it manually. Dependency injection knows what to do with it.</param>
+        public void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env,
+            IConfiguration configuration)
         {
             if (env.IsDevelopment())
             {
@@ -27,7 +33,8 @@ namespace DotNetCoreFood
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                string greeting = configuration["Greeting"] ?? "Hello, World!";
+                await context.Response.WriteAsync(greeting);
             });
         }
     }
