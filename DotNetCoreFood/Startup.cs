@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetCoreFood
@@ -12,19 +11,18 @@ namespace DotNetCoreFood
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IGreeter, Greeter>();
         }
 
         /// <summary>
-        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.' 
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// Dependencies are injected automatically. Use the <see cref="ConfigureServices(IServiceCollection)"/>
+        /// method above to register custom dependencies.
         /// </summary>
-        /// <param name="app"></param>
-        /// <param name="env"></param>
-        /// <param name="configuration">Not added by default. 
-        /// I added it manually. Dependency injection knows what to do with it.</param>
         public void Configure(
             IApplicationBuilder app, 
             IHostingEnvironment env,
-            IConfiguration configuration)
+            IGreeter greeter)
         {
             if (env.IsDevelopment())
             {
@@ -33,7 +31,7 @@ namespace DotNetCoreFood
 
             app.Run(async (context) =>
             {
-                string greeting = configuration["Greeting"] ?? "Hello, World!";
+                string greeting = greeter.GetMessageOfTheDay() ?? "Hello, World!";
                 await context.Response.WriteAsync(greeting);
             });
         }
