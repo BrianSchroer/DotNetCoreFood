@@ -6,12 +6,12 @@ Following along with [K Scott Allen's **ASP.NET Core Fundamentals** Pluralsight 
 ## What I've learned...
 
 ### Startup & Configuration
-* ASP.NET Core sites are bootstrapped via [**Program.Main**](dotnetcorefood/Program.cs).
+* ASP.NET Core sites are bootstrapped via [**Program.Main**](DotNetCoreFood/Program.cs).
 It calls its static **BuildWebHost** method. **WebHost.CreateDefaultBuilder**
 	* uses the Kestrel web server
     * enables IIS integration
     * sets up default logging to the command line console / Visual Studio "Output" window
-* `.UseStartup<Startup>` in Program.BuildWebHost specifies that [**Startup.cs**](dotnetcorefood/Startup.cs)
+* `.UseStartup<Startup>` in Program.BuildWebHost specifies that [**Startup.cs**](DotNetCoreFood/Startup.cs)
 is to be used for configuration. (See https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup.)
 * Arguments to **Startup.Configure** are automatically dependency-injected
 (as are arguments to the constructors of those dependencies... and their dependencies, etc.)
@@ -23,10 +23,10 @@ Its `Item[String}` property (e.g. `_configuration["Greeting"]`) looks at these s
 	* command line argument
     * environment variable
     * user secret
-    * [**appsettings.json**](dotnetcorefood/appsettings.json)
+    * [**appsettings.json**](DotNetCoreFood/appsettings.json)
 
 ## New-ish C# features I haven't used yet and want to try with this repo
-✅ expression-bodied method - [Program.BuildWebHost](dotnetcorefood/Program.cs)
+✅ expression-bodied method - [Program.BuildWebHost](DotNetCoreFood/Program.cs)
 
 ⬜️ expression-bodied property
 
