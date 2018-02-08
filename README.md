@@ -25,8 +25,10 @@ Its `Item[String}` property (e.g. `_configuration["Greeting"]`) looks at these s
     * user secret
     * [**appsettings.json**](DotNetCoreFood/appsettings.json)
 
-## New-ish C# features I haven't used yet and want to try with this repo
-✅ expression-bodied method - [Program.BuildWebHost](DotNetCoreFood/Program.cs)
+-----
+
+##### New-ish C# features I haven't used yet and want to try with this repo
+✅ [expression-bodied method](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members) - [Program.BuildWebHost](DotNetCoreFood/Program.cs)
 
 ⬜️ expression-bodied property
 
@@ -34,6 +36,16 @@ Its `Item[String}` property (e.g. `_configuration["Greeting"]`) looks at these s
 
 ⬜️ [inline-declared out variable](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7#out-variables)
 
-⬜️ tuple with named fields
+⬜️ [tuple (multiple values) return from function](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7#tuples)
 
-⬜️ tuple with named fields
+⬜️ ["discards"](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7#discards)
+
+⬜️ [read-only auto-property](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#read-only-auto-properties)
+
+⬜️ [read-only auto-property](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#read-only-auto-properties)
+
+⬜️ [auto-property initializer](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#auto-property-initializers)
+
+⬜️ [using static](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#using-static)
+
+⬜️ ["Elvis operator"](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#auto-property-initializers)
