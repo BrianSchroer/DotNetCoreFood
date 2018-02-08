@@ -12,6 +12,7 @@ namespace DotNetCoreFood
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreeter, Greeter>();
+            services.AddMvc();
         }
 
         /// <summary>
@@ -28,6 +29,9 @@ namespace DotNetCoreFood
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
 
             app.Run(async (context) =>
             {

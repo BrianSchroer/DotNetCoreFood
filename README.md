@@ -1,5 +1,5 @@
 ﻿# DotNetCoreFood
-ASP.NET Core food web app
+ASP.NET Core 2.0 food web app
 
 Following along with [K Scott Allen's **ASP.NET Core Fundamentals** Pluralsight course](https://www.pluralsight.com/courses/aspdotnet-core-fundamentals)...
 
@@ -24,10 +24,29 @@ Its `Item[String}` property (e.g. `_configuration["Greeting"]`) looks at these s
     * environment variable
     * user secret
     * [**appsettings.json**](DotNetCoreFood/appsettings.json)
+      * appsettings.*environmentName*.json files can be used to override settings for a specific environment (e.g. "appsettings.development.json").
+* Middleware is defined in [Startup.Configure](DotNetCoreFood/Startup.cs) via 
+[`IApplicationBuilder.Use...` extension methods](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.iapplicationbuilder?view=aspnetcore-2.0).
+The order in which these middleware usages is defined is important.
+* [launchsettings.json](DotNetCoreFood/Properties/launchsettings.json) defines environment variables, 
+Windows authentication, URL & port, etc. for local machine development.
+(Can be viewed/modified via VS2017 GUI via project right-click | Properties| Debug.)
+(See https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments.)
 
+### Serving static files
+* Call **IApplicationBuilder.UseStaticFiles()** from [Startup.Configure](DotNetCoreFood/Startup.cs) to enable serving files from the "wwwroot" folder.
+* **IApplicationBuilder.UseDefaultFiles()** says to serve index.html from wwwroot (or index.html from any subfolder)
+when the URL only contains the folder name. (It's configurable, but "index.html" is the "default default".)
+* **IApplicationBuilder.UseFileServer()** combines .UseDefaultFiles() and .UseStaticFiles().
+
+### Configuring MVC
+* Call **IApplicationBuilder.UseMvcWithDefaultRoute()** from [Startup.Configure](DotNetCoreFood/Startup.cs)
+and **IServiceCollection.AddMvc()** in **Startup.ConfigureServices** to setup default ASP.NET MVC routing.
+* By default, this looks for a *prefix*Controller file in the "Controllers" folder (default prefix is "Home") and
+a public method (default is "Index") to execute, so "/", "/Home" and "/Home/Index" all call the same controller action.
 -----
 
-##### New-ish C# features I haven't used yet and want to try with this repo
+#### New-ish C# features I haven't used yet and want to try with this repo
 ✅ [expression-bodied method](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members) - [Program.BuildWebHost](DotNetCoreFood/Program.cs)
 
 ⬜️ expression-bodied property
@@ -49,3 +68,9 @@ Its `Item[String}` property (e.g. `_configuration["Greeting"]`) looks at these s
 ⬜️ [using static](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#using-static)
 
 ⬜️ ["Elvis operator"](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#auto-property-initializers)
+
+-----
+#### Other TODOs
+⬜️ add unit tests
+
+⬜️ Make nuget package(s) from https://github.com/BrianSchroer/dotnet-test-helpers & use in this repo?
