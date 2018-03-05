@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 
-namespace DotNetCoreFood
+namespace DotNetCoreFood.Services
 {
     public class Greeter : IGreeter
     {

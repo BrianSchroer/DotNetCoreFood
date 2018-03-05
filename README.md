@@ -1,7 +1,4 @@
-﻿# DotNetCoreFood
-ASP.NET Core 2.0 food web app
-
-Following along with [K Scott Allen's **ASP.NET Core Fundamentals** Pluralsight course](https://www.pluralsight.com/courses/aspdotnet-core-fundamentals)...
+﻿ASP.NET Core 2.0 food web app created by following along with [K Scott Allen's **ASP.NET Core Fundamentals** Pluralsight course]ASP.NET Core 2.0 food web app created by following along with [K Scott Allen's **ASP.NET Core Fundamentals** Pluralsight course](https://www.pluralsight.com/courses/aspdotnet-core-fundamentals)...
 
 ## What I've learned...
 
@@ -17,6 +14,9 @@ is to be used for configuration. (See https://docs.microsoft.com/en-us/aspnet/co
 (as are arguments to the constructors of those dependencies... and their dependencies, etc.)
 * Several interfaces (e.g. IApplicationBuilder, IHostingEnvironment, IConfiguration) are pre-registered with default implementations.
 You can register your own dependencies (or override defaults) in **Startup.ConfigureServices**.
+* Some IServiceCollection.Add methods:
+  * AddSingleton
+  * AddScoped = one instance per HTTP request
 * The default implementation of [IConfiguration](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.iconfiguration?view=aspnetcore-2.0) 
 is [Microsoft.Extensions.Configuration.ConfigurationRoot](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.configurationroot?view=aspnetcore-2.0).
 Its `Item[String}` property (e.g. `_configuration["Greeting"]`) looks at these sources (in order):
@@ -46,6 +46,25 @@ and **IServiceCollection.AddMvc()** in **Startup.ConfigureServices** to setup de
 a public method (default is "Index") to execute, so "/", "/Home" and "/Home/Index" all call the same controller action.
 -----
 
+### Routing
+
+**Convention-based routing: (routeBuilder.MapRoute)**
+
+app.[UseMvcWithDefaultRoute](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.mvcapplicationbuilderextensions.usemvcwithdefaultroute?view=aspnetcore-2.0)() in [Startup.Configure](DotNetCoreFood/Startup.cs) uses the template `{controller=Home}/{action=Index}/{id?}`
+
+**Attribute-based routing:**
+
+`[Route("[controller]/[action]")]` attributes applied to controller / controller action method
+
+### Action Results
+Controller actions return something that implements [IActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult?view=aspnetcore-2.0)
+
+Action results are "lazy". They don't generate content until executed via .ExecuteResultAsync(*context*)
+
+**ObjectResult** tells the framework to use [content negotiation](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/formatting#content-negotiation)
+
+-----
+
 #### New-ish C# features I haven't used yet and want to try with this repo
 ✅ [expression-bodied method](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members) - [Program.BuildWebHost](DotNetCoreFood/Program.cs)
 
@@ -73,4 +92,4 @@ a public method (default is "Index") to execute, so "/", "/Home" and "/Home/Inde
 #### Other TODOs
 ⬜️ add unit tests
 
-⬜️ Make nuget package(s) from https://github.com/BrianSchroer/dotnet-test-helpers & use in this repo?
+✅ Make nuget packages from https://github.com/BrianSchroer/sparky-test-helpers & use in this repo

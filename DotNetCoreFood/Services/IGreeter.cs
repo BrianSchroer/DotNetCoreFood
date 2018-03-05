@@ -1,4 +1,4 @@
-﻿namespace DotNetCoreFood
+namespace DotNetCoreFood.Services
 {
     public interface IGreeter
     {
