@@ -63,6 +63,17 @@ Action results are "lazy". They don't generate content until executed via .Execu
 
 **ObjectResult** tells the framework to use [content negotiation](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/formatting#content-negotiation)
 
+### Tag Helpers
+* Add New Item "MVC View Imports Page" with directive `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` (see [_ViewImports.cshtml](DotNetCoreFood/Views/_ViewImports.cshtml))
+
+This is also the place to define other common namespaces (e.g. `@using MyProject.Models`)
+
+https://www.exceptionnotfound.net/the-viewimports-cshtml-file-setting-up-view-namespaces-in-mvc-6/
+
+### R4MVC
+
+To generate code, from the Package Manager console, type `Generate-R4MVC`
+
 -----
 
 #### New-ish C# features I haven't used yet and want to try with this repo
