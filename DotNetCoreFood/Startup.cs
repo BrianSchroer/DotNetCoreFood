@@ -14,7 +14,7 @@ namespace DotNetCoreFood
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreeter, Greeter>();
-            services.AddScoped<IRestaurantData, MemoryRestaurantData>();
+            services.AddSingleton<IRestaurantData, MemoryRestaurantData>();
             services.AddMvc();
         }
 
@@ -35,6 +35,7 @@ namespace DotNetCoreFood
 
             app.UseStaticFiles();
             app.UseMvc(ConfigureRoutes);
+            AutoMapperInitializer.Initialize();
 
             app.Run(async (context) =>
             {

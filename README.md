@@ -70,37 +70,15 @@ This is also the place to define other common namespaces (e.g. `@using MyProject
 
 https://www.exceptionnotfound.net/the-viewimports-cshtml-file-setting-up-view-namespaces-in-mvc-6/
 
+```
+    <input asp-for="Name" />
+    <select asp-for="Cuisine" asp-items="@Html.GetEnumSelectList<CuisineType>()"></select>
+```
+
 ### R4MVC
+
+Register tag helpers in [_ViewImports.cshtml](DotNetCoreFood/Views/_ViewImports.cshtml): `@addTagHelper *, R4Mvc` 
 
 To generate code, from the Package Manager console, type `Generate-R4MVC`
 
 -----
-
-#### New-ish C# features I haven't used yet and want to try with this repo
-✅ [expression-bodied method](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members) - [Program.BuildWebHost](DotNetCoreFood/Program.cs)
-
-⬜️ expression-bodied property
-
-⬜️ expression-bodied constructor
-
-⬜️ [inline-declared out variable](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7#out-variables)
-
-⬜️ [tuple (multiple values) return from function](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7#tuples)
-
-⬜️ ["discards"](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7#discards)
-
-⬜️ [read-only auto-property](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#read-only-auto-properties)
-
-⬜️ [read-only auto-property](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#read-only-auto-properties)
-
-⬜️ [auto-property initializer](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#auto-property-initializers)
-
-⬜️ [using static](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#using-static)
-
-⬜️ ["Elvis operator"](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#auto-property-initializers)
-
------
-#### Other TODOs
-⬜️ add unit tests
-
-✅ Make nuget packages from https://github.com/BrianSchroer/sparky-test-helpers & use in this repo

@@ -2,6 +2,7 @@ using DotNetCoreFood.Models;
 using DotNetCoreFood.Services;
 using DotNetCoreFood.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using SparkyTools.AutoMapper;
 
 namespace DotNetCoreFood.Controllers
 {
@@ -35,6 +36,27 @@ namespace DotNetCoreFood.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public virtual IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public virtual IActionResult Create(RestaurantEditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var restaurant = _restaurantData.Add(model.MappedTo<Restaurant>());
+
+                // POST Redirect GET pattern
+                return RedirectToAction(Actions.Details(restaurant.Id));
+            }
+
+            return View();
         }
     }
 }

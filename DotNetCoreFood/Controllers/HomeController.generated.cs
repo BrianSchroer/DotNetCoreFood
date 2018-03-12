@@ -72,6 +72,7 @@ namespace DotNetCoreFood.Controllers
         {
             public readonly string Index = "Index";
             public readonly string Details = "Details";
+            public readonly string Create = "Create";
         }
 
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -79,6 +80,7 @@ namespace DotNetCoreFood.Controllers
         {
             public const string Index = "Index";
             public const string Details = "Details";
+            public const string Create = "Create";
         }
 
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -90,10 +92,12 @@ namespace DotNetCoreFood.Controllers
             public _ViewNamesClass ViewNames => s_ViewNames;
             public class _ViewNamesClass
             {
+                public readonly string Create = "Create";
                 public readonly string Details = "Details";
                 public readonly string Index = "Index";
             }
 
+            public string Create = "~/Views/Home/Create.cshtml";
             public string Details = "~/Views/Home/Details.cshtml";
             public string Index = "~/Views/Home/Index.cshtml";
         }
@@ -129,6 +133,27 @@ namespace DotNetCoreFood.Controllers
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Details);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             DetailsOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void CreateOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo);
+        [NonAction]
+        public override Microsoft.AspNetCore.Mvc.IActionResult Create()
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Create);
+            CreateOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void CreateOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, DotNetCoreFood.ViewModels.RestaurantEditModel model);
+        [NonAction]
+        public override Microsoft.AspNetCore.Mvc.IActionResult Create(DotNetCoreFood.ViewModels.RestaurantEditModel model)
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Create);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            CreateOverride(callInfo, model);
             return callInfo;
         }
     }

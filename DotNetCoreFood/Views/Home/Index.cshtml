@@ -5,15 +5,16 @@
 </head>
 <body>
     <h1>@Model.CurrentMessage</h1>
-    <table>
+    <table style="margin-bottom: 1em">
         @foreach (var restaurant in Model.Restaurants)
         {
             <tr>
                 <td>@restaurant.Id</td>
                 <td>@restaurant.Name</td>
-                <td><a asp-action=@MVC.Home.ActionNames.Details asp-route-id="@restaurant.Id">Details</a></td>
+                <td><a mvc-action=@MVC.Home.Details(restaurant.Id)>Details</a></td>
             </tr>
         }
     </table>
+    <a mvc-action=@MVC.Home.Create()>Add Restaurant</a>
 </body>
 </html>

@@ -1,4 +1,10 @@
 ﻿@model Restaurant
 <h1>@Model.Name</h1>
-<div>... details ...</div>
+<div>
+    ID: @Model.Id
+</div>
+<div>
+    Cuisine: @Model.Cuisine
+</div>
+
 <a asp-action=@MVC.Home.ActionNames.Index>Home</a>
