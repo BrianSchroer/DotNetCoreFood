@@ -6,7 +6,7 @@ using DotNetCoreFood.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using SparkyTestHelpers.AspNetCore.Mvc;
+using SparkyTestHelpers.AspNetCore;
 using SparkyTestHelpers.Moq;
 using System.Linq;
 
@@ -58,15 +58,14 @@ namespace DotNetCoreFood.UnitTests
             _mockRestaurantData.Setup(x => x.GetAll()).Returns(restaurants);
             _mockGreeter.Setup(x => x.GetMessageOfTheDay()).Returns("Test message");
 
-            ViewResult viewResult =
-                ControllerActionTester.ForAction(_controller.Index)
-                .ExpectingViewName(null)
-                .ExpectingModelType<HomeIndexViewModel>()
-                .Test<ViewResult>();
-
-            var model = (HomeIndexViewModel)viewResult.Model;
-            Assert.AreEqual("Test message", model.CurrentMessage);
-            Assert.AreSame(restaurants, model.Restaurants);
+            ControllerActionTester
+                .ForAction(_controller.Index)
+                .ExpectingModel<HomeIndexViewModel>(model =>
+                {
+                    Assert.AreEqual("Test message", model.CurrentMessage);
+                    Assert.AreSame(restaurants, model.Restaurants);
+                })
+                .TestViewResult();
         }
 
         [TestMethod]
@@ -75,13 +74,10 @@ namespace DotNetCoreFood.UnitTests
             var restaurant = new Restaurant { Id = 1, Cuisine = CuisineType.Italian, Name = "TestName" };
             _mockRestaurantData.Setup(x => x.Get(1)).Returns(restaurant);
 
-            ViewResult viewResult =
-                ControllerActionTester.ForAction(() => _controller.Details(1))
-                .ExpectingViewName(null)
-                .ExpectingModelType<Restaurant>()
-                .Test<ViewResult>();
-
-            Assert.AreSame(restaurant, viewResult.Model);
+            ControllerActionTester
+                .ForAction(() => _controller.Details(1))
+                .ExpectingModel<Restaurant>(model => Assert.AreSame(restaurant, model))
+                .TestViewResult();
         }
 
         [TestMethod]
@@ -89,17 +85,15 @@ namespace DotNetCoreFood.UnitTests
         {
             _mockRestaurantData.Setup(x => x.Get(1)).Returns((Restaurant)null);
 
-            RedirectToActionResult result =
-                ControllerActionTester.ForAction(() => _controller.Details(1))
+            ControllerActionTester
+                .ForAction(() => _controller.Details(1))
                 .TestRedirectToAction("Index");
         }
 
         [TestMethod]
         public void Home_Create_get_should_return_expected_view()
         {
-            ControllerActionTester.ForAction(_controller.Create)
-                .ExpectingViewName(null)
-                .Test<ViewResult>();
+            ControllerActionTester.ForAction(_controller.Create).TestResult<ViewResult>();
         }
 
         [TestMethod]
@@ -108,8 +102,8 @@ namespace DotNetCoreFood.UnitTests
             ModelStateTestHelper.SetModelStateIsValid(_controller, true);
             _mockRestaurantData.Setup(x => x.Add(Any.InstanceOf<Restaurant>())).Returns(new Restaurant { Id = 123 });
 
-            RedirectToRouteResult result =
-                ControllerActionTester.ForAction(() => _controller.Create(new RestaurantEditModel()))
+            ControllerActionTester
+                .ForAction(() => _controller.Create(new RestaurantEditModel()))
                 .TestRedirectToRoute("/Home/Details/123");
         }
 
@@ -118,10 +112,9 @@ namespace DotNetCoreFood.UnitTests
         {
             ModelStateTestHelper.SetModelStateIsValid(_controller, false);
 
-            ViewResult viewResult =
-                ControllerActionTester.ForAction(() => _controller.Create(new RestaurantEditModel()))
-                .ExpectingViewName(null)
-                .Test<ViewResult>();
+            ControllerActionTester
+                .ForAction(() => _controller.Create(new RestaurantEditModel()))
+                .TestResult<ViewResult>();
         }
     }
 }

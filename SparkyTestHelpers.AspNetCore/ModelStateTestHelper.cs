@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 
-namespace SparkyTestHelpers.AspNetCore.Mvc
+namespace SparkyTestHelpers.AspNetCore
 {
     /// <summary>
     /// <see cref="Controller"/> ModelState test helpers.

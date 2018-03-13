@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DotNetCoreFood\DotNetCoreFood.csproj" />
-    <ProjectReference Include="..\SparkyTestHelpers.AspNetCore.Mvc\SparkyTestHelpers.AspNetCore.Mvc.csproj" />
+    <ProjectReference Include="..\SparkyTestHelpers.AspNetCore\SparkyTestHelpers.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>
