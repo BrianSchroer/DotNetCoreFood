@@ -16,6 +16,7 @@ namespace DotNetCoreFood.UnitTests
         [TestInitialize]
         public void TestInitialize()
         {
+            Mapper.Reset();
             AutoMapperInitializer.Initialize();
             Mapper.AssertConfigurationIsValid();
         }
