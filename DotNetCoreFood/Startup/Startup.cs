@@ -1,11 +1,10 @@
-﻿using DotNetCoreFood.Services;
+using DotNetCoreFood.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DotNetCoreFood
+namespace DotNetCoreFood.Startup
 {
     public class Startup
     {
@@ -34,19 +33,14 @@ namespace DotNetCoreFood
             }
 
             app.UseStaticFiles();
-            app.UseMvc(ConfigureRoutes);
-            AutoMapperInitializer.Initialize();
+            app.UseMvc(RouteConfig.ConfigureRoutes);
+            AutoMapperConfig.Initialize();
 
             app.Run(async (context) =>
             {
                 string greeting = greeter.GetMessageOfTheDay() ?? "Hello, World!";
                 await context.Response.WriteAsync(greeting);
             });
-        }
-
-        private void ConfigureRoutes(IRouteBuilder routeBuilder)
-        {
-            routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
         }
     }
 }

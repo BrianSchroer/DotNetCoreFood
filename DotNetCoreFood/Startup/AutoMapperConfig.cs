@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+using AutoMapper;
 using SparkyTools.AutoMapper;
 using DotNetCoreFood.ViewModels;
 using DotNetCoreFood.Models;
 
-namespace DotNetCoreFood
+namespace DotNetCoreFood.Startup
 {
-    public static class AutoMapperInitializer
+    public static class AutoMapperConfig
     {
         public static void Initialize()
         {

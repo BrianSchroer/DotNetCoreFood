@@ -8,7 +8,7 @@ It calls its static **BuildWebHost** method. **WebHost.CreateDefaultBuilder**
 	* uses the Kestrel web server
     * enables IIS integration
     * sets up default logging to the command line console / Visual Studio "Output" window
-* `.UseStartup<Startup>` in Program.BuildWebHost specifies that [**Startup.cs**](DotNetCoreFood/Startup.cs)
+* `.UseStartup<Startup>` in Program.BuildWebHost specifies that [**Startup.cs**](DotNetCoreFood/Startup/Startup.cs)
 is to be used for configuration. (See https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup.)
 * Arguments to **Startup.Configure** are automatically dependency-injected
 (as are arguments to the constructors of those dependencies... and their dependencies, etc.)
@@ -25,7 +25,7 @@ Its `Item[String}` property (e.g. `_configuration["Greeting"]`) looks at these s
     * user secret
     * [**appsettings.json**](DotNetCoreFood/appsettings.json)
       * appsettings.*environmentName*.json files can be used to override settings for a specific environment (e.g. "appsettings.development.json").
-* Middleware is defined in [Startup.Configure](DotNetCoreFood/Startup.cs) via 
+* Middleware is defined in [Startup.Configure](DotNetCoreFood/Startup/Startup.cs) via 
 [`IApplicationBuilder.Use...` extension methods](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.iapplicationbuilder?view=aspnetcore-2.0).
 The order in which these middleware usages is defined is important.
 * [launchsettings.json](DotNetCoreFood/Properties/launchsettings.json) defines environment variables, 
@@ -34,13 +34,13 @@ Windows authentication, URL & port, etc. for local machine development.
 (See https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments.)
 
 ### Serving static files
-* Call **IApplicationBuilder.UseStaticFiles()** from [Startup.Configure](DotNetCoreFood/Startup.cs) to enable serving files from the "wwwroot" folder.
+* Call **IApplicationBuilder.UseStaticFiles()** from [Startup.Configure](DotNetCoreFood/Startup/Startup.cs) to enable serving files from the "wwwroot" folder.
 * **IApplicationBuilder.UseDefaultFiles()** says to serve index.html from wwwroot (or index.html from any subfolder)
 when the URL only contains the folder name. (It's configurable, but "index.html" is the "default default".)
 * **IApplicationBuilder.UseFileServer()** combines .UseDefaultFiles() and .UseStaticFiles().
 
 ### Configuring MVC
-* Call **IApplicationBuilder.UseMvcWithDefaultRoute()** from [Startup.Configure](DotNetCoreFood/Startup.cs)
+* Call **IApplicationBuilder.UseMvcWithDefaultRoute()** from [Startup.Configure](DotNetCoreFood/Startup/Startup.cs)
 and **IServiceCollection.AddMvc()** in **Startup.ConfigureServices** to setup default ASP.NET MVC routing.
 * By default, this looks for a *prefix*Controller file in the "Controllers" folder (default prefix is "Home") and
 a public method (default is "Index") to execute, so "/", "/Home" and "/Home/Index" all call the same controller action.
@@ -50,7 +50,7 @@ a public method (default is "Index") to execute, so "/", "/Home" and "/Home/Inde
 
 **Convention-based routing: (routeBuilder.MapRoute)**
 
-app.[UseMvcWithDefaultRoute](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.mvcapplicationbuilderextensions.usemvcwithdefaultroute?view=aspnetcore-2.0)() in [Startup.Configure](DotNetCoreFood/Startup.cs) uses the template `{controller=Home}/{action=Index}/{id?}`
+app.[UseMvcWithDefaultRoute](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.mvcapplicationbuilderextensions.usemvcwithdefaultroute?view=aspnetcore-2.0)() in [Startup.Configure](DotNetCoreFood/Startup/Startup.cs) uses the template `{controller=Home}/{action=Index}/{id?}`
 
 **Attribute-based routing:**
 
@@ -82,3 +82,13 @@ Register tag helpers in [_ViewImports.cshtml](DotNetCoreFood/Views/_ViewImports.
 To generate code, from the Package Manager console, type `Generate-R4MVC`
 
 -----
+
+### Entity Framework
+
+To verify that SQL Server LocalDB is set up correctly
+* Use **Developer Command Prompt for VS 2017**: `sqllocaldb info`
+* View | SQLServer Object Explorer
+
+Microsoft.AspNetCore.All NuGet package references necessary Entity Framework packages.
+
+We want to be able to use the comand line tool "dotnet ef" - Enabled by adding NuGet reference 

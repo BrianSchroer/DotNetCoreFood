@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DotNetCoreFood.Controllers;
+﻿using DotNetCoreFood.Controllers;
 using DotNetCoreFood.Models;
 using DotNetCoreFood.Services;
 using DotNetCoreFood.ViewModels;
@@ -16,7 +15,7 @@ namespace DotNetCoreFood.UnitTests
     /// <see cref="HomeController"/> tests.
     /// </summary>
     [TestClass]
-    public class HomeControllerTests
+    public class HomeControllerTests : TestsUsingAutomapper
     {
         private Mock<IRestaurantData> _mockRestaurantData;
         private Mock<IGreeter> _mockGreeter;
@@ -25,10 +24,6 @@ namespace DotNetCoreFood.UnitTests
         [TestInitialize]
         public void TestInitialize()
         {
-            Mapper.Reset();
-            AutoMapperInitializer.Initialize();
-            Mapper.AssertConfigurationIsValid();
-
             _mockRestaurantData = new Mock<IRestaurantData>();
             _mockGreeter = new Mock<IGreeter>();
             _controller = new HomeController(_mockRestaurantData.Object, _mockGreeter.Object);

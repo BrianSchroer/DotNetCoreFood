@@ -25,7 +25,7 @@ namespace DotNetCoreFood
         /// <returns><see cref="IWebHost"/> implementation.</returns>
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
+                .UseStartup<Startup.Startup>()
                 .Build();
     }
 }
