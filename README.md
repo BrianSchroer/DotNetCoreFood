@@ -91,4 +91,38 @@ To verify that SQL Server LocalDB is set up correctly
 
 Microsoft.AspNetCore.All NuGet package references necessary Entity Framework packages.
 
-We want to be able to use the comand line tool "dotnet ef" - Enabled by adding NuGet reference 
+We want to be able to use the comand line tool "dotnet ef" - Enabled by adding NuGet reference - Done by editing project's .csproj file to designate that this is a tooling dependency, not a runtime dependency:
+
+```
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />
+  </ItemGroup>
+```
+
+Created [DotNetCoreFoodDbContext.cs](DotNetCoreFood/Data/DotNetCoreFoodDbContext.cs) class inheriting from **DbContext**, with `public DbSet<Restaurant> Restaurants { get; set; }` property.
+
+Added [SqlRestaurantData.cs](DotNetCoreFood/Services/SqlRestaurantData.cs), using the new DbContext class.
+
+Updated appsettings.json and Startup.cs:
+
+```csharp
+
+            services.AddDbContext<DotNetCoreFoodDbContext>(options => 
+                options.UseSqlServer(_configuration.GetConnectionString("DotNetCoreFood")));
+
+            services.AddScoped<IRestaurantData, SqlRestaurantData>();
+```
+
+Use Entity Framework Migrations to create the database:
+
+```
+dotnet ef migrations add InitialMigration -v
+```
+("InitialMigration" is the name of the migration.)
+
+Creates Migrations folder.
+
+```
+dotnet ef database update -v
+```
+...applies unapplied migrations.
