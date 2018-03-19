@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Reflection;
 
-namespace SparkyTestHelpers.AspNetCore
+namespace SparkyTestHelpers.AspNetCore.Controllers
 {
     /// <summary>
-    /// <see cref="Type"/> tester;
+    /// <see cref="Type"/> tester.
     /// </summary>
     internal static class TypeTester
     {

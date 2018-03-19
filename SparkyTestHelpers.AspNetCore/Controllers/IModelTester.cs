@@ -1,4 +1,4 @@
-﻿namespace SparkyTestHelpers.AspNetCore
+namespace SparkyTestHelpers.AspNetCore.Controllers
 {
     internal interface IModelTester
     {

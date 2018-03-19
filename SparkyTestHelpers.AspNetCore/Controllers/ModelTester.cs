@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace SparkyTestHelpers.AspNetCore
+namespace SparkyTestHelpers.AspNetCore.Controllers
 {
     /// <summary>
     /// <see cref="ViewResult.Model"/> tester for <see cref="ControllerActionTester"/>.

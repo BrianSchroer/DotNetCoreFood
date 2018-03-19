@@ -5,7 +5,7 @@ using DotNetCoreFood.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using SparkyTestHelpers.AspNetCore;
+using SparkyTestHelpers.AspNetCore.Controllers;
 using SparkyTestHelpers.Moq;
 using System.Linq;
 
