@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{D87AB9BB-272D-414D-9685-2929B7934F0C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SparkyTestHelpers.AspNetCore", "SparkyTestHelpers.AspNetCore\SparkyTestHelpers.AspNetCore.csproj", "{DAAA752E-8684-4088-B4AE-29B380CC8663}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +26,6 @@ Global
 		{D87AB9BB-272D-414D-9685-2929B7934F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D87AB9BB-272D-414D-9685-2929B7934F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D87AB9BB-272D-414D-9685-2929B7934F0C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DAAA752E-8684-4088-B4AE-29B380CC8663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAAA752E-8684-4088-B4AE-29B380CC8663}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAAA752E-8684-4088-B4AE-29B380CC8663}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DAAA752E-8684-4088-B4AE-29B380CC8663}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
