@@ -1,5 +1,6 @@
 ﻿using DotNetCoreFood.Data;
 using DotNetCoreFood.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,6 +25,13 @@ namespace DotNetCoreFood.Services
         public IEnumerable<Restaurant> GetAll()
         {
             return _context.Restaurants.OrderBy(r => r.Name);
+        }
+
+        public Restaurant Update(Restaurant restaurant)
+        {
+            _context.Attach(restaurant).State = EntityState.Modified;
+            _context.SaveChanges();
+            return restaurant;
         }
 
         public SqlRestaurantData(DotNetCoreFoodDbContext context)

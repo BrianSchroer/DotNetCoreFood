@@ -34,5 +34,12 @@ namespace DotNetCoreFood.Services
         {
             return _restaurants.OrderBy(r => r.Name);
         }
+
+        public Restaurant Update(Restaurant restaurant)
+        {
+            _restaurants.Remove(Get(restaurant.Id));
+            _restaurants.Add(restaurant);
+            return restaurant;
+        }
     }
 }

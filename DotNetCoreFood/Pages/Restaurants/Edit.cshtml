@@ -1,0 +1,24 @@
+﻿@page "{id}"
+@using DotNetCoreFood.Pages.Restaurants
+@model EditModel
+@{ 
+    string _title = $"Edit {Model.Restaurant.Name}";
+    ViewBag.Title = _title;
+}
+
+<h1>@_title</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Restaurant.Id" />
+    <div>
+        <label asp-for="Restaurant.Name"></label>
+        <input asp-for="Restaurant.Name" />
+        <span asp-validation-for="Restaurant.Name"></span>
+    </div>
+    <div>
+        <label asp-for="Restaurant.Cuisine"></label>
+        <select asp-for="Restaurant.Cuisine" asp-items="@Html.GetEnumSelectList<CuisineType>()"></select>
+        <span asp-validation-for="Restaurant.Cuisine"></span>
+    </div>
+    <input type="submit" name="save" value="Save" />
+</form>

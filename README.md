@@ -126,3 +126,25 @@ Creates Migrations folder.
 dotnet ef database update -v
 ```
 ...applies unapplied migrations.
+
+### Layout
+
+Default defined in  [/Views/_ViewStart.cshtml](DotNetCoreFood/Views/_ViewStart.cshtml) 
+
+### Razor Pages
+
+Page names are used for routing
+
+Pages folder can use _ViewImports.cshtml, _ViewStart.cshtml and _Layout.cshtml, like the Views folder does.
+
+[@inject](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/dependency-injection) can be used to inject service dependency into Page (or View)
+
+The @model directive is different than with View - It specifies "code-behind" class implementing PageModel.
+
+PageModel.OnGet() is similar to controller action - used to populate model properties.
+
+The @page directive can specify additional route values (e.g. `@page "{id:int}"`). These values are input arguments to PageModel.OnGet().
+
+PageModel.OnGet() can return IActionResult - "Page()" is the equivalent of a controller action returning "View()".
+
+[BindProperty] attribute can be used on PageModel property so it doesn't have to be explicitly specified in PageModel.OnPost().

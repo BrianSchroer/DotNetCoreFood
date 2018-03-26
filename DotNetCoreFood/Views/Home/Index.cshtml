@@ -1,20 +1,21 @@
 ﻿@model HomeIndexViewModel
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Home</title>
-</head>
-<body>
-    <h1>@Model.CurrentMessage</h1>
-    <table style="margin-bottom: 1em">
-        @foreach (var restaurant in Model.Restaurants)
-        {
-            <tr>
-                <td>@restaurant.Id</td>
-                <td>@restaurant.Name</td>
-                <td><a mvc-action=@MVC.Home.Details(restaurant.Id)>Details</a></td>
-            </tr>
-        }
-    </table>
-    <a mvc-action=@MVC.Home.Create()>Add Restaurant</a>
-</body>
-</html>
+@{ ViewBag.Title = "Home page"; }
+
+<table style="margin-bottom: 1em">
+    @foreach (var restaurant in Model.Restaurants)
+    {
+        <tr>
+            <td>@restaurant.Id</td>
+            <td>@restaurant.Name</td>
+            <td>
+                <a mvc-action=@MVC.Home.Details(restaurant.Id)>Details</a>
+                <a asp-page="/Restaurants/Edit" asp-route-id="@restaurant.Id">Edit</a>
+            </td>
+        </tr>
+    }
+</table>
+<a mvc-action=@MVC.Home.Create()>Add Restaurant</a>
+
+@section footer {
+    @Model.CurrentMessage
+}
