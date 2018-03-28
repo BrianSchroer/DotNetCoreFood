@@ -18,7 +18,6 @@ namespace DotNetCoreFood.UnitTests
     public class HomeControllerTests : TestsUsingAutomapper
     {
         private Mock<IRestaurantData> _mockRestaurantData;
-        private Mock<IGreeter> _mockGreeter;
         private HomeController _controller;
         private ControllerTester<HomeController> _controllerTester;
 
@@ -26,8 +25,7 @@ namespace DotNetCoreFood.UnitTests
         public void TestInitialize()
         {
             _mockRestaurantData = new Mock<IRestaurantData>();
-            _mockGreeter = new Mock<IGreeter>();
-            _controller = new HomeController(_mockRestaurantData.Object, _mockGreeter.Object);
+            _controller = new HomeController(_mockRestaurantData.Object);
             _controllerTester = new ControllerTester<HomeController>(_controller);
         }
 
@@ -39,25 +37,16 @@ namespace DotNetCoreFood.UnitTests
         }
 
         [TestMethod]
-        public void Home_Index_should_call_Greeter_GetMessageOfTheDay()
-        {
-            _controller.Index();
-            _mockGreeter.VerifyOneCallTo(x => x.GetMessageOfTheDay());
-        }
-
-        [TestMethod]
         public void Home_Index_should_return_expected_view_and_model()
         {
             var restaurants = Enumerable.Range(1, 3).Select(i => new Restaurant { Id = i, Name = $"Name{i}" }).ToArray();
 
             _mockRestaurantData.Setup(x => x.GetAll()).Returns(restaurants);
-            _mockGreeter.Setup(x => x.GetMessageOfTheDay()).Returns("Test message");
 
            _controllerTester 
                 .Action(x => x.Index)
                 .ExpectingModel<HomeIndexViewModel>(model =>
                 {
-                    Assert.AreEqual("Test message", model.CurrentMessage);
                     Assert.AreSame(restaurants, model.Restaurants);
                 })
                 .TestView();

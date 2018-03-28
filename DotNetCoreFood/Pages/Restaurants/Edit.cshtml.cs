@@ -7,19 +7,19 @@ namespace DotNetCoreFood.Pages.Restaurants
 {
     public class EditModel : PageModel
     {
-        private readonly IRestaurantData _restauranttData;
+        private readonly IRestaurantData _restaurantData;
 
         [BindProperty]
         public Restaurant Restaurant { get; set; }
 
         public EditModel(IRestaurantData restaurantData)
         {
-            _restauranttData = restaurantData;
+            _restaurantData = restaurantData;
         }
 
         public IActionResult OnGet(int id)
         {
-            Restaurant = _restauranttData.Get(id);
+            Restaurant = _restaurantData.Get(id);
 
             if (Restaurant == null)
             {
@@ -33,7 +33,7 @@ namespace DotNetCoreFood.Pages.Restaurants
         {
             if (ModelState.IsValid)
             {
-                _restauranttData.Update(Restaurant);
+                _restaurantData.Update(Restaurant);
                 return RedirectToAction(MVC.Home.ActionNames.Details, MVC.Home.Name, new { id = Restaurant.Id } );
             }
 

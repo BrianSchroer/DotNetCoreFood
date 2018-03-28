@@ -148,3 +148,26 @@ The @page directive can specify additional route values (e.g. `@page "{id:int}"`
 PageModel.OnGet() can return IActionResult - "Page()" is the equivalent of a controller action returning "View()".
 
 [BindProperty] attribute can be used on PageModel property so it doesn't have to be explicitly specified in PageModel.OnPost().
+
+### View Components
+ GreeterViewComponent : ViewComponent
+
+like "internally-available" Controller
+
+        public IViewComponentResult Invoke()
+        {
+            return View("Default", _greeter.GetMessageOfTheDay());
+        }
+
+"View" returns a ViewViewComponentResult
+
+The View .cshtml file goes in \Views\Shared\Components\Greeter\Default.cshtml
+
+Usage: `@await Component.InvokeAsync("Greeter")`
+
+--or--
+
+Update \_ViewImports.cshtml: 
+ `@addTagHelper *, MyNamespace`
+and use:
+`<vc:greeter></vc:greeter>`

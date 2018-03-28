@@ -9,12 +9,10 @@ namespace DotNetCoreFood.Controllers
     public partial class HomeController : Controller
     {
         private readonly IRestaurantData _restaurantData;
-        private readonly IGreeter _greeter;
 
-        public HomeController(IRestaurantData restaurantData, IGreeter greeter)
+        public HomeController(IRestaurantData restaurantData)
         {
             _restaurantData = restaurantData;
-            _greeter = greeter;
         }
 
         public virtual IActionResult Index()
@@ -22,7 +20,6 @@ namespace DotNetCoreFood.Controllers
             return base.View(new HomeIndexViewModel
             {
                 Restaurants = _restaurantData.GetAll(),
-                CurrentMessage = _greeter.GetMessageOfTheDay()
             });
         }
 
