@@ -168,6 +168,22 @@ Usage: `@await Component.InvokeAsync("Greeter")`
 --or--
 
 Update \_ViewImports.cshtml: 
- `@addTagHelper *, MyNamespace`
+ `@addTagHelper *, MyNamespace` 
 and use:
 `<vc:greeter></vc:greeter>`
+
+## Authentication
+
+**OIDC** = Open ID Connect
+
+Turning on SSL:
+* via Project Properties | Debug
+* in Startup.cs: `app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());`
+
+Registering with identity provider:
+
+portal.azure.com | Azure Active Directory | App registrations
+
+Register site with URL, e.g.: https://localhost:44302/
+
+Create reply URL: https://localhost:44302/signin-oidc - Reply handled by middleware
